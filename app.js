@@ -13,6 +13,7 @@ const myconfig = require('./myconfig'); // Personal data: my token, key
 
 const token = myconfig.botToken; // Your token from BotFather;
 const witaikey = myconfig.witaiKey; // Your api key from wit.ai
+const folder = myconfig.folder; // Folder in your server programm can access
 
 let bot = new TelegramBot(token, {polling: {params:{timeout: 2000, interval: 0 },},});
 
@@ -25,7 +26,7 @@ bot.on('message', (msg)=>{
   if (msg.voice) {
 
     // Sending 'typing' notification
-    Mes.bot.sendChatAction(Mes.msg.chat.id, 'typing');
+    bot.sendChatAction(msg.chat.id, 'typing');
 
     input({msg: msg, bot: bot}, {test: true}, (text)=>{
 
@@ -57,7 +58,8 @@ function input (Mes, data, callback) {
     trace+='request.get '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
       // Saving file
-      fs.writeFile('/home/temp/voice.ogg', body, (err) => {
+      // fs.writeFile(`${folder}voice.ogg`, body, (err) => {
+      fs.writeFile(`${folder}voice.ogg`, body, (err) => {
       trace+='writefile '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
         if (err) throw err;
@@ -66,7 +68,7 @@ function input (Mes, data, callback) {
         // Converting file with opusdec app using commandline
         // opesdec must be installed on your system (ubuntu command for installation: apt install opus-tools)
         
-        let command = `opusdec --rate 16000 /home/temp/voice.ogg /home/temp/voice.wav;
+        let command = `opusdec --rate 16000 ${folder}voice.ogg ${folder}voice.wav;
           `;
 
         cmd.get(command, function(err, data, stderr){
@@ -74,12 +76,13 @@ function input (Mes, data, callback) {
           trace+='opusdec '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
           // Reading converted file
-          fs.readFile("/home/temp/voice.wav", function (err, data) {
-          trace+='fs.readFile '+ Math.round((Date.now()-started)/10)/100 + '\n';
+          fs.readFile(`${folder}voice.wav`, function (err, data) {
+            
+            trace+='fs.readFile '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
             // Deleting files
-            fs.unlink(`/home/temp/voice.wav`);
-            fs.unlink(`/home/temp/voice.ogg`);
+            fs.unlink(`${folder}voice.wav`);
+            fs.unlink(`${folder}voice.ogg`);
 
             if (err) {throw err;}
         
