@@ -1,0 +1,32 @@
+{
+  "name": "telegram-voice-recognition",
+  "version": "0.0.1",
+  "description": "Simple code to recognize telegram voice messages using wit.ai API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatPlayBots/Telegram-Voice-Recognition.git"
+  },
+  "keywords": [
+    "voice",
+    "recognition",
+    "telegram",
+    "wit.ai",
+    "ai",
+    "ogg",
+    "opus"
+  ],
+  "author": "CatPlayBots",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatPlayBots/Telegram-Voice-Recognition/issues"
+  },
+  "homepage": "https://github.com/CatPlayBots/Telegram-Voice-Recognition#readme",
+  "dependencies": {
+    "node-cmd": "^3.0.0",
+    "node-telegram-bot-api": "^0.50.0"
+  }
+}
