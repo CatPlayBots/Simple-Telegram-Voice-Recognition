@@ -84,10 +84,7 @@ function input (Mes, data, callback) {
 
               // If testing - sending trace info and text
               if (data.test) {
-                sender.Menu({
-                  Mes: Mes,
-                  text: trace+text,
-                });
+                Mes.bot.sendMessage(Mes.msg.chat.id, trace+text);
               }
           
               if (callback) {callback(text);}
