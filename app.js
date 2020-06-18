@@ -22,7 +22,7 @@ bot.on('message', (msg)=>{
     // Sending 'typing' notification
     Mes.bot.sendChatAction(Mes.msg.chat.id, 'typing');
 
-    input({msg: msg, bot: bot}, {}, (text)=>{
+    input({msg: msg, bot: bot}, {test: true}, (text)=>{
 
       bot.sendMessage(msg.from.id, text);
 
@@ -106,7 +106,7 @@ function witaiApi (body, callback) {
   const uri = `https://api.wit.ai/speech`;
   const key = witaikey; // Your api key from wit.ai
 
-  // отправляем post запрос с буфером аудио
+  // Sending post request with buffer of audiofile
   request.post({
     uri,
     headers: {
