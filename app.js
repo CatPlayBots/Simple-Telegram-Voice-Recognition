@@ -6,12 +6,17 @@ const fs = require('fs');
 const cmd = require('node-cmd');
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = 'Your token'; // Your token from BotFather;
+// opesdec must be installed on your system (Ubuntu command for installation: apt install opus-tools)
+
+
+const myconfig = require('./myconfig'); // Personal data: my token, key
+
+const token = myconfig.botToken; // Your token from BotFather;
+const witaikey = myconfig.witaiKey; // Your api key from wit.ai
+
 let bot = new TelegramBot(token, {polling: {params:{timeout: 2000, interval: 0 },},});
 
-const witaikey = 'Your api key'; // Your api key from wit.ai
 
-// opesdec must be installed on your system (Ubuntu command for installation: apt install opus-tools)
 
 
 bot.on('message', (msg)=>{
