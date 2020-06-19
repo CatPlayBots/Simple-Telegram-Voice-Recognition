@@ -13,7 +13,7 @@ const myconfig = require('./myconfig'); // Personal data: my token, key
 
 const token = myconfig.botToken; // Your token from BotFather;
 const witaikey = myconfig.witaiKey; // Your api key from wit.ai
-const folder = myconfig.folder; // Folder in your server programm can access
+const folder = myconfig.folder || ''; // Folder in your server, that is available for programm
 
 let bot = new TelegramBot(token, {polling: {params:{timeout: 2000, interval: 0 },},});
 
@@ -58,12 +58,10 @@ function input (Mes, data, callback) {
     trace+='request.get '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
       // Saving file
-      // fs.writeFile(`${folder}voice.ogg`, body, (err) => {
       fs.writeFile(`${folder}voice.ogg`, body, (err) => {
       trace+='writefile '+ Math.round((Date.now()-started)/10)/100 + '\n';
 
         if (err) throw err;
-
 
         // Converting file with opusdec app using commandline
         // opesdec must be installed on your system (ubuntu command for installation: apt install opus-tools)
